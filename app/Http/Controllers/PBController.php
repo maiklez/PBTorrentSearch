@@ -33,6 +33,7 @@ class PBController extends Controller
 		$table = $pagina_inicio->filterXPath('//table/tr');
 		$row_count=0;
 		
+		$rows =[];
 		//filas
 		foreach ($table as $i => $tr){
 				
