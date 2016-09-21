@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use Goutte\Client;
+use App\Search;
 
 class PBController extends Controller
 {
@@ -17,12 +18,17 @@ class PBController extends Controller
 
 	public function getIndex(){
 		
+		
 		return $this->getSearch("orange");
 	}
 	
 	
 	// https://developer.yahoo.com/yql/console/?q=select%20*%20from%20html%20where%20url%3D%22https%3A%2F%2Fthepiratebay.se%2Fsearch%2Fubuntu%2F0%2F7%2F0%22%20and%0A%20%20%20%20%20%20xpath%3D%27%2F%2Ftr%27
 	public function getSearch($search){
+		
+		$value = Search::firstOrNew(['word' => $search]);
+		$value->counter = $value->counter +1;
+		$value->save();
 		
 		$client = new Client();
 		
