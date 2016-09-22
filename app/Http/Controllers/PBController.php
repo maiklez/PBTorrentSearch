@@ -49,7 +49,13 @@ class PBController extends Controller
 			$magnet="";
 			$seed="";
 			$leech="";
-				
+			$categoryA="";
+			$categoryB="";
+			$categoryA_link="";
+			$categoryB_link="";
+			$torrent_name ="";
+			$details ="";
+			
 			$row_count++;
 			//thread, tr -> names
 			$tds = array();
@@ -60,12 +66,24 @@ class PBController extends Controller
 				// extract the value
 				if($ncol==0){
 					$type =  str_replace (array("\t","\n"), "",trim ( $node->nodeValue ,"\t\n\r\0\x0B"  ));
+					
+					$categoryA_link=$node->getElementsByTagName ( 'a' )->item(0)->getAttribute('href');
+					$categoryA=$node->getElementsByTagName ( 'a' )->item(0)->nodeValue;
+						
+					$categoryB_link=$node->getElementsByTagName ( 'a' )->item(1)->getAttribute('href');
+					$categoryB=$node->getElementsByTagName ( 'a' )->item(1)->nodeValue;
+					
 				}elseif ($ncol==2){
 						
-					$name=str_replace (array("\t","\n"), "",trim ($node->nodeValue,"\t\n\r\0\x0B"  ));
+					//$name=str_replace (array("\t","\n"), "",trim ($node->nodeValue,"\t\n\r\0\x0B"  ));
 					$link=$node->getElementsByTagName ( 'a' )->item(0)->getAttribute('href');
 					$magnet=$node->getElementsByTagName ( 'a' )->item(1)->getAttribute('href');
-						
+					
+					$torrent_name=str_replace (array("\t","\n"), "", $node->getElementsByTagName ( 'div' )->item(0)->nodeValue);
+					$details=$node->getElementsByTagName ( 'font' )->item(0)->nodeValue;
+
+					$name = $torrent_name . " - " . $details;
+					
 				}elseif ($ncol==4){
 					$seed=$node->nodeValue;
 				}elseif ($ncol==6){
@@ -76,12 +94,18 @@ class PBController extends Controller
 			}
 		
 			$rows[] = ['row'=> [
+					'torrent_name'=> $torrent_name,
+					'details'=> $details,
 					'type'=> $type,
 					'name'=>$name,
 					'link'=>$link,
 					'magnet'=>$magnet,
 					'seeders'=>$seed,
-					'leechers'=>$leech
+					'leechers'=>$leech,
+					'category_A'=>$categoryA,
+					'category_A_link'=>$categoryA_link,
+					'category_B'=>$categoryB,					
+					'category_B_link'=>$categoryB_link
 			]];
 		}
 		
