@@ -22,3 +22,7 @@ $app->get('/', [
 $app->get('/{search}', [
 		'as' => 'profile', 'uses' => 'PBController@getSearch'
 ]);
+
+$app->post('/set/magnet', [
+		'as' => 'setmagnet', 'uses' => 'PBController@setMagnet'
+]);

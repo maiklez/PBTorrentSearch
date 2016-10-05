@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use Goutte\Client;
 use App\Search;
+use Illuminate\Http\Request;
+use App\Download;
 
 class PBController extends Controller
 {
@@ -31,7 +33,8 @@ class PBController extends Controller
 		$value->save();
 		
 		$client = new Client();
-		
+		//100 -audio , 200 -video, 300 -Applications, 400 -Games, 500 -porn
+		//search/orange/0/7/100,200,300,400,600
 		$pagina_inicio = $client->request('GET', 'http://pbproxy.maik.rocks/s/?q='.$search.'&page=0&orderby=99');
 		
 		$json = [];
@@ -112,4 +115,49 @@ class PBController extends Controller
 		
 		return response()->json($rows);
 	}
+	
+	public function setMagnet(Request $request){
+		$tmp = $request->row;
+		
+		$download = Download::create([
+				'torrent_name'=> $tmp['torrent_name'],
+				'details'=> $tmp['details'],
+				'type'=> $tmp['type'],
+				'name'=>$tmp['name'],
+				'link'=>$tmp['link'],
+				'magnet'=>$tmp['magnet'],
+				'seeders'=>$tmp['seeders'],
+				'leechers'=>$tmp['leechers'],
+				'category_A'=>$tmp['category_A'],
+				'category_A_link'=>$tmp['category_A_link'],
+				'category_B'=>$tmp['category_B'],					
+				'category_B_link'=>$tmp['category_B_link']
+				
+			]);
+		
+		return response()->json($tmp['torrent_name']);
+	}
+// 	public function getImage($word){
+// 		//get the word submitted from the form
+// 		//$word = "universo";
+// 		$img_pattern = "#<img src=http\S* width=[0-9]* height=[0-9]*>#";
+// 		// validate the word
+// 		if ($word != '') {
+// 			// initialise the session
+// 			$ch = curl_init();
+// 			// Set the URL
+// 			curl_setopt($ch, CURLOPT_URL, "http://images.google.com/images?gbv=1&hl=en&sa=1&q=".urlencode($word)."&btnG=Search+images");
+// 			// Return the output from the cURL session rather than displaying in the browser.
+// 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+// 			//Execute the session, returning the results to $curlout, and close.
+// 			$curlout = curl_exec($ch);
+// 			curl_close($ch);
+// 			preg_match_all($img_pattern, $curlout, $img_tags);
+// 			//display the results - I'll leave the formatting to you
+// 			print("Resultado de la busqueda $word: ".sizeof($img_tags[0])."<br/>\n");
+// 			foreach ($img_tags[0] as $val){
+// 				print(" ".$val."\n");
+// 			}
+// 		}
+// 	}
 }
