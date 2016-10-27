@@ -47,22 +47,20 @@ class PBController extends Controller
 		$rows =[];
 		//filas
 		
-			
+		$type="";
+		$name="";
+		$link="";
+		$magnet="https://thepiratebay.org/";
+		$seed="";
+		$leech="";
+		$categoryA="";
+		$categoryB="";
+		$categoryA_link="";
+		$categoryB_link="";
+		$torrent_name ="Sorry! We are Out of Service. Try Again in a few minutes.";
+		$details ="";
 		
 		foreach ($table as $i => $tr){
-				
-			$type="";
-			$name="";
-			$link="";
-			$magnet="";
-			$seed="";
-			$leech="";
-			$categoryA="";
-			$categoryB="";
-			$categoryA_link="";
-			$categoryB_link="";
-			$torrent_name ="Sorry! We are Out of Service. Try Again in a few minutes.";
-			$details ="";
 			
 			$row_count++;
 			//thread, tr -> names
