@@ -37,7 +37,11 @@ class PBController extends Controller
 		$client = new Client();
 		//100 -audio , 200 -video, 300 -Applications, 400 -Games, 500 -porn
 		//search/orange/0/7/100,200,300,400,600
-		$pagina_inicio = $client->request('GET', 'http://pbproxy.maik.rocks/s/?q='.$search.'&page=0&orderby=99');
+		//'https://thepiratebay.org/search/'.$search.'/0/7/0'
+		
+		//'http://pbproxy.maik.rocks/s/?q='.$search.'&page=0&orderby=99'
+		
+		$pagina_inicio = $client->request('GET', 'https://thepiratebay.org/search/'.$search.'/0/7/0');
 		
 		$json = [];
 		
