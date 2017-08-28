@@ -39,9 +39,10 @@ class PBController extends Controller
 		//search/orange/0/7/100,200,300,400,600
 		//'https://thepiratebay.org/search/'.$search.'/0/7/0'
 		
+		//https://proxyship.cf/s/?q='.$search.'&page=0&orderby=99'
 		//'http://pbproxy.maik.rocks/s/?q='.$search.'&page=0&orderby=99'
 		
-		$pagina_inicio = $client->request('GET', 'https://thepiratebay.org/search/'.$search.'/0/7/0');
+		$pagina_inicio = $client->request('GET', 'https://proxyship.cf/s/?q='.$search.'&page=0&orderby=99');
 		
 		$json = [];
 		
