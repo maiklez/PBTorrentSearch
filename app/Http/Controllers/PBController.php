@@ -42,7 +42,7 @@ class PBController extends Controller
 		//https://proxyship.cf/s/?q='.$search.'&page=0&orderby=99'
 		//'http://pbproxy.maik.rocks/s/?q='.$search.'&page=0&orderby=99'
 		
-		$pagina_inicio = $client->request('GET', 'https://proxyship.cf/s/?q='.$search.'&page=0&orderby=99');
+		$pagina_inicio = $client->request('GET', 'http://pbproxy.maik.rocks/s/?q='.$search.'&page=0&orderby=99'.$search.'&page=0&orderby=99');
 		
 		$json = [];
 		
