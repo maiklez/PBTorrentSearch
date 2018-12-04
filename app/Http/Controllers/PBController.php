@@ -96,7 +96,7 @@ class PBController extends Controller
 						$magnet=$node->getElementsByTagName ( 'a' )->item(1)->getAttribute('href');
 						
 						$torrent_name=str_replace (array("\t","\n"), "", $node->getElementsByTagName ( 'div' )->item(0)->nodeValue);
-						$details=$node->getElementsByTagName ( 'font' )->item(0)->nodeValue;
+            $details=($node->getElementsByTagName ( 'font' )->item(0)!=null)? $node->getElementsByTagName ( 'font' )->item(0)->nodeValue : '';
 	
 						$name = $torrent_name . " - " . $details;
 						
